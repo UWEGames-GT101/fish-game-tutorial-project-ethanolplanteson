@@ -88,7 +88,30 @@ class MyASGEGame(pyasge.ASGEGame):
         pass
 
     def keyHandler(self, event: pyasge.KeyEvent) -> None:
-        pass
+        if event.action == pyasge.KEYS.KEY_PRESSED:
+
+            if event.key == pyasge.KEYS.KEY_RIGHT or event.key == pyasge.KEYS.KEY_LEFT:
+                self.menu_option = 1 - self.menu_option
+                if self.menu_option == 0:
+                    self.play_option.string = ">Start"
+                    self.play_option.colour = pyasge.COLOURS.HOTPINK
+                    self.exit_option.string = "Exit"
+                    self.exit_option.colour = pyasge.COLOURS.LIGHTSLATEGRAY
+            else:
+                self.play_option.string = "Start"
+                self.play_option.colour = pyasge.COLOURS.LIGHTSLATEGRAY
+                self.exit_option.string = ">Exit"
+                self.exit_option.colour = pyasge.COLOURS.HOTPINK
+
+        # if enter is pressed the action of the menu is triggered
+        if event.key == pyasge.KEYS.KEY_ENTER:
+            if self.menu_option == 0:
+                self.menu = False
+            else:
+                self.signal_exit()
+
+
+
 
     def spawn(self) -> None:
         pass
