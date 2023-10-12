@@ -65,7 +65,24 @@ class MyASGEGame(pyasge.ASGEGame):
         pass
 
     def initMenu(self) -> bool:
-        pass
+        self.data.fonts["MainFont"] = self.data.renderer.loadFont("/data/fonts/KGHAPPY.ttf", 64)
+        self.menu_text = pyasge.Text(self.data.fonts["MainFont"])
+        self.menu_text.string = "The Fish Game"
+        self.menu_text.position = [100,100]
+        self.menu_text.colour = pyasge.COLOURS.HOTPINK
+
+        # this starts game
+        self.play_option = pyasge.Text(self.data.fonts["MainFont"])
+        self.play_option.string = ">Start"
+        self.play_option.position = [100,400]
+        self.play_option.colour = pyasge.COLOURS.HOTPINK
+
+        #this exits the game
+        self.exit_option = pyasge.Text(self.data.fonts["MainFont"])
+        self.exit_option.string = "Exit"
+        self.exit_option.position = [500,400]
+        self.exit_option.colour = pyasge.COLOURS.LIGHTSLATEGRAY
+        return True
 
     def clickHandler(self, event: pyasge.ClickEvent) -> None:
         pass
@@ -96,6 +113,10 @@ class MyASGEGame(pyasge.ASGEGame):
         if self.menu:
             # render the menu here
             self.data.renderer.render(self.data.background)
+            self.data.renderer.render(self.menu_text)
+
+            self.data.renderer.render(self.play_option)
+            self.data.renderer.render(self.exit_option)
         else:
             # render the game here
             pass
